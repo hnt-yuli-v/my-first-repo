@@ -1,2 +1,2 @@
-# my-first-repo
-My first repository on GitHub
+# web (front-end) програмування
+Репозиторій Гнатюк Юлії Володимирівни 
