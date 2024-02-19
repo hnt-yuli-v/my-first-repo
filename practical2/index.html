@@ -23,10 +23,12 @@
             width: 100%;
             display: flex;
             flex-wrap: wrap;
+            align-items: flex-start; /* Додано для вертикального вирівнювання */
         }
 
         [class^="col-"] {
             border: 1px solid black;
+            position: relative; /* Додано для встановлення контексту позиціонування */
         }
 
         .col-lg-4, .col-md-6, .col-sm-12 {
@@ -39,9 +41,7 @@
         }
 
         span {
-            position: absolute;
-            right: 0;
-            top: 0;
+            /* Видалено position: absolute; */
             margin-left: auto;
             margin-right: auto;
             border: 1px solid black;
@@ -58,7 +58,7 @@
         }
 
         #Caption-3 {
-            background-color: #DDA0DD;
+            background-color: #DDA0DD ;
         }
 
         @media (min-width: 992px) {
