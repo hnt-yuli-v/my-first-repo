@@ -2,8 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Practical 2 </title>
-    <link rel="stylesheet" type="text/css"  href="styles.css">
+    <title>Practical 2</title>
     <style>
         body {
             margin: 0;
@@ -23,17 +22,17 @@
             width: 100%;
             display: flex;
             flex-wrap: wrap;
-            align-items: flex-start; /* Додано для вертикального вирівнювання */
         }
 
         [class^="col-"] {
+            float: left;
             border: 1px solid black;
-            position: relative; /* Додано для встановлення контексту позиціонування */
         }
 
         .col-lg-4, .col-md-6, .col-sm-12 {
             background-color: #32CD32;
             padding: 20px 10px 0px 10px;
+            position: relative;
         }
 
         p {
@@ -41,7 +40,9 @@
         }
 
         span {
-            /* Видалено position: absolute; */
+            position: absolute;
+            right: 0;
+            top: 0;
             margin-left: auto;
             margin-right: auto;
             border: 1px solid black;
@@ -58,7 +59,7 @@
         }
 
         #Caption-3 {
-            background-color: #DDA0DD ;
+            background-color: #DDA0DD;
         }
 
         @media (min-width: 992px) {
@@ -108,11 +109,12 @@
     </style>
 </head>
 <body>
-<h1>Main caption</h1>
-<div class="row">
-    <div class="col-lg-4 col-md-6 col-sm-12"><p><span id="Caption-1">Caption 1</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid amet blanditiis consequatur dolore doloremque ex hic in, ipsam ipsum itaque magnam magni maiores modi odit omnis.</p></div>
-    <div class="col-lg-4 col-md-6 col-sm-12"><p><span id="Caption-2">Caption 2</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid amet blanditiis consequatur dolore doloremque ex hic in, ipsam ipsum itaque magnam magni maiores modi odit omnis. </p></div>
-    <div class="col-lg-4 col-md-12 col-sm-12"><p><span id="Caption-3">Caption 3</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid amet blanditiis consequatur dolore doloremque ex hic in, ipsam ipsum itaque magnam magni maiores modi odit omnis.</p></div>
-</div>
+    <h1>Main caption</h1>
+    <div class="row">
+        <div class="col-lg-4 col-md-6 col-sm-12"><p><span id="Caption-1">Caption 1</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid amet blanditiis consequatur dolore doloremque ex hic in, ipsam ipsum itaque magnam magni maiores modi odit omnis.</p></div>
+        <div class="col-lg-4 col-md-6 col-sm-12"><p><span id="Caption-2">Caption 2</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid amet blanditiis consequatur dolore doloremque ex hic in, ipsam ipsum itaque magnam magni maiores modi odit omnis.</p></div>
+        <div class="col-lg-4 col-md-12 col-sm-12"><p><span id="Caption-3">Caption 3</span>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid amet blanditiis consequatur dolore doloremque ex hic in, ipsam ipsum itaque magnam magni maiores modi odit omnis.</p></div>
+    </div>
 </body>
 </html>
+
