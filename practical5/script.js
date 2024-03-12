@@ -24,12 +24,12 @@ var car2 = {
 car1.drive = function() {
     console.log("I am not driving at night");
 };
-car1.drive(); 
+
 
 car2.drive = function() {
     console.log("I can drive anytime");
 };
-car2.drive(); 
+
 
 function Truck(color, weight, avgSpeed, brand, model) {
     this.color = color;
