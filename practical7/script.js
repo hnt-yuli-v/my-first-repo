@@ -3,7 +3,7 @@ function Triangular(a = 3, b = 4, c = 5) {
 }
 
 const defaultTriangular = Triangular();
-const customTriangular1 = Triangular(2, 4, 6);
+const customTriangular1 = Triangular(4, 6, 8);
 const customTriangular2 = Triangular(10, 15, 18);
 
 console.log(defaultTriangular);
