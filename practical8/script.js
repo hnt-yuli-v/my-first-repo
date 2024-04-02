@@ -1,7 +1,7 @@
 import { speak as speakHello } from './library/SpeakHello.js';
 import { speak as speakGoodbye } from './library/SpeakGoodBye.js';
 import { speakAdd as speakAddGoodbye } from './library/SpeakGoodBye.js';
-
+(function() {
 var names = ["Bill", "John", "Jen", "Jason", "Paul", "Frank", "Steven", "Larry", "Paula", "Laura", "Jim"];
 
 
