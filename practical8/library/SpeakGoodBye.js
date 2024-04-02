@@ -6,4 +6,5 @@ export function speak(name) {
 
 export function speakAdd(name) {
   console.log(speakWord + " Mr." + name);
+}
 
