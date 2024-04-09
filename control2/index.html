@@ -1,15 +1,20 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>control2</title>
+    <title>control2</title> 
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <h1>Контрольна робота N2 Гнатюк Юлія Володимирівна</h1>
-    <div id="sortedArray"></div>
-
-    <script src="script.js"></script>
-</body>
+    <h1>Контрольна робота N2 Гнатюк Юлія володимирівна</h1> 
+    <select id="widthSelector">
+        <option value="30">30px</option>
+        <option value="50" selected>50px</option>
+        <option value="70">70px</option>
+    </select>
+    <button onclick="generateBlock()">Згенерувати</button>
+    <div id="blockContainer"></div>
+</body> 
 </html>
 
