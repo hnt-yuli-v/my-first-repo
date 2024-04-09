@@ -1,32 +1,43 @@
-function getRandomInt(min, max) {
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
+document.addEventListener("DOMContentLoaded", function() {
 
-function sortDescending(arr) {
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = i + 1; j < arr.length; j++) {
-      if (arr[i] < arr[j]) {
-        let temp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = temp;
-      }
-    }
+  let array = [];
+  for (let i = 0; i < 20; i++) {
+    array.push(Math.floor(Math.random() * 100) + 1);
   }
-  return arr;
+
+  array.sort((a, b) => b - a);
+
+  let sortedArrayOutput = array.join(", ");
+  document.getElementById("blockContainer").innerHTML = `<p>${sortedArrayOutput}</p>`;
+});
+
+function generateBlock() {
+  
+  let width = document.getElementById("widthSelector").value;
+
+
+  let block = document.createElement("div");
+  block.style.backgroundColor = "red";
+  block.style.width = width + "px";
+  block.style.height = "30px";
+  block.style.position = "relative"; 
+  block.style.marginTop = "20px";
+  document.getElementById("blockContainer").appendChild(block);
+
+
+  let moveUpButton = document.createElement("button");
+  moveUpButton.textContent = "Посунути уверх";
+  moveUpButton.onclick = function() {
+    block.style.top = (parseInt(block.style.top) || 0) - 20 + "px";
+  };
+
+  let moveDownButton = document.createElement("button");
+  moveDownButton.textContent = "Посунути вниз";
+  moveDownButton.onclick = function() {
+    block.style.top = (parseInt(block.style.top) || 0) + 20 + "px";
+  };
+
+  document.body.appendChild(moveUpButton);
+  document.body.appendChild(moveDownButton);
 }
-
-let sortedArrayDiv = document.getElementById('sortedArray');
-
-let array = [];
-for (let i = 0; i < 20; i++) {
-  array.push(getRandomInt(1, 100)); 
-}
-
-array = sortDescending(array);
-
-
-let sortedArrayText = document.createTextNode("Відсортований масив у спадаючому порядку: " + array.join(", "));
-
-
-sortedArrayDiv.appendChild(sortedArrayText);
 
