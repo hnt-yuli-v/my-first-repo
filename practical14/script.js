@@ -63,11 +63,11 @@ const toggleLights = (r, c, grid) => {
     toggle(r, c - 1);
     toggle(r, c + 1);
 
-    if (!changed && currentSteps % 2 === 0) {
-        currentSteps -= 2;
+    if (changed) {
+        currentSteps++;
         updateSteps();
-    } else {
-        currentSteps++; 
+    } else if (currentSteps % 2 === 0) {
+        currentSteps -= 2; 
         updateSteps();
     }
 
