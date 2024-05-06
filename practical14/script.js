@@ -53,6 +53,8 @@ const toggleLights = (r, c, grid) => {
         }
     };
 
+    const originalGrid = JSON.stringify(grid); // Запам'ятовуємо початковий стан
+
     toggle(r, c);
     toggle(r - 1, c);
     toggle(r + 1, c);
@@ -68,6 +70,12 @@ const toggleLights = (r, c, grid) => {
             alert("Вітаємо! Ви перемогли!");
             restart();
         }, 1000);
+    }
+    
+    if (currentSteps % 2 === 0 && JSON.stringify(grid) === originalGrid) {
+        // Якщо стан не змінився, зменшуємо бали
+        currentSteps -= 2;
+        updateSteps();
     }
 };
 
@@ -115,4 +123,3 @@ const resetToInitialState = () => {
 };
 
 document.getElementById('newGameButton').addEventListener('click', restart);
-
