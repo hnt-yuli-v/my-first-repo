@@ -1,6 +1,8 @@
-* {
+body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
 }
 
 h1 {
@@ -24,6 +26,7 @@ td {
     background-color: #ccc;
     border: 1px solid #000;
     cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .lightOn {
@@ -35,13 +38,14 @@ button {
     margin: 5px;
     background-color: #333;
     color: white;
-    border: none;
+    border: 2px solid #333;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 button:hover {
     background-color: #666;
+    border-color: #666;
 }
-
