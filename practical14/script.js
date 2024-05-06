@@ -7,26 +7,24 @@ let gameState = {
     initialGameStates: {}
 };
 
-let { currentGameIndex, currentSteps, games, startTime, timer, initialGameStates } = gameState;
-
 const fetching = async () => {
     try {
         const response = await fetch('gameLightOut.json');
         const data = await response.json();
-        games = data;
-        initialGameStates = Object.values(games).map(game => game.initial_state); 
-        setupGame(currentGameIndex);
+        gameState.games = data;
+        gameState.initialGameStates = Object.values(gameState.games).map(game => game.initial_state); 
+        setupGame(gameState.currentGameIndex);
     } catch (error) {
         console.error('Failed to fetch game data:', error);
     }
 };
 
 const startGame = (game) => {
-    clearInterval(timer);
-    startTime = Date.now();
-    timer = setInterval(updateTime, 1000);
+    clearInterval(gameState.timer);
+    gameState.startTime = Date.now();
+    gameState.timer = setInterval(updateTime, 1000);
 
-    currentSteps = 0;
+    gameState.currentSteps = 0;
     updateSteps();
 
     document.getElementById('minSteps').textContent = game.minimum_steps_to_win;
@@ -64,17 +62,17 @@ const toggleLights = (r, c, grid) => {
     toggle(r, c + 1);
 
     if (!changed && JSON.stringify(grid) === originalGrid) {
-        if (currentSteps % 2 === 0) {
-            currentSteps--; 
+        if (gameState.currentSteps % 2 === 0) {
+            gameState.currentSteps--; 
         }
     } else if (changed) {
-        currentSteps++; 
+        gameState.currentSteps++; 
     }
 
     updateSteps();
 
     if (checkWin(grid)) {
-        clearInterval(timer);
+        clearInterval(gameState.timer);
         setTimeout(() => {
             alert("Вітаємо! Ви перемогли!");
             restart();
@@ -87,42 +85,42 @@ const checkWin = (grid) => {
 };
 
 const changeCombination = () => {
-    currentGameIndex = (currentGameIndex + 1) % Object.keys(games).length;
-    setupGame(currentGameIndex);
+    gameState.currentGameIndex = (gameState.currentGameIndex + 1) % Object.keys(gameState.games).length;
+    setupGame(gameState.currentGameIndex);
 };
 
 const restart = () => {
-    currentSteps = 0;
+    gameState.currentSteps = 0;
     resetToInitialState();
 };
 
 const updateSteps = () => {
-    document.getElementById('currentSteps').textContent = currentSteps;
+    document.getElementById('currentSteps').textContent = gameState.currentSteps;
 };
 
 const updateTime = () => {
-    let elapsed = Math.floor((Date.now() - startTime) / 1000);
+    let elapsed = Math.floor((Date.now() - gameState.startTime) / 1000);
     document.getElementById('gameTime').textContent = elapsed;
 };
 
 window.onload = fetching;
 
 const setupGame = (index) => {
-    const gameKey = Object.keys(games)[index];
-    const game = games[gameKey];
+    const gameKey = Object.keys(gameState.games)[index];
+    const game = gameState.games[gameKey];
     startGame(game);
 };
 
 const resetSteps = () => {
-    currentSteps = 0;
+    gameState.currentSteps = 0;
     updateSteps();
 };
 
 const resetToInitialState = () => {
-    const gameKey = Object.keys(games)[currentGameIndex];
-    const initialState = initialGameStates[currentGameIndex];
-    games[gameKey].initial_state = JSON.parse(JSON.stringify(initialState)); 
-    startGame(games[gameKey]);
+    const gameKey = Object.keys(gameState.games)[gameState.currentGameIndex];
+    const initialState = gameState.initialGameStates[gameState.currentGameIndex];
+    gameState.games[gameKey].initial_state = JSON.parse(JSON.stringify(initialState)); 
+    startGame(gameState.games[gameKey]);
 };
 
 document.getElementById('newGameButton').addEventListener('click', restart);
