@@ -17,7 +17,7 @@ const fetching = async () => {
         initialGameStates = Object.values(games).map(game => game.initial_state); 
         setupGame(currentGameIndex);
     } catch (error) {
-        console.error('ailed to fetch game data:', error);
+        console.error('Failed to fetch game data:', error);
     }
 };
 
@@ -45,6 +45,7 @@ const startGame = (game) => {
 };
 
 const toggleLights = (r, c, grid) => {
+    const originalGrid = JSON.stringify(grid); 
     const toggle = (r, c) => {
         if (r >= 0 && r < 5 && c >= 0 && c < 5) {
             grid[r][c] = 1 - grid[r][c];
@@ -52,8 +53,6 @@ const toggleLights = (r, c, grid) => {
             cell.className = grid[r][c] === 1 ? 'lightOn' : '';
         }
     };
-
-    const originalGrid = JSON.stringify(grid); // Запам'ятовуємо початковий стан
 
     toggle(r, c);
     toggle(r - 1, c);
@@ -71,9 +70,9 @@ const toggleLights = (r, c, grid) => {
             restart();
         }, 1000);
     }
+
+    if (JSON.stringify(grid) === originalGrid && currentSteps % 2 === 0) {
     
-    if (currentSteps % 2 === 0 && JSON.stringify(grid) === originalGrid) {
-        // Якщо стан не змінився, зменшуємо бали
         currentSteps -= 2;
         updateSteps();
     }
