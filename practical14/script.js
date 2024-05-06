@@ -63,13 +63,15 @@ const toggleLights = (r, c, grid) => {
     toggle(r, c - 1);
     toggle(r, c + 1);
 
-    if (changed) {
-        currentSteps++;
-        updateSteps();
-    } else if (currentSteps % 2 === 0) {
-        currentSteps -= 2; 
-        updateSteps();
+    if (!changed && JSON.stringify(grid) === originalGrid) {
+        if (currentSteps % 2 === 0) {
+            currentSteps--; 
+        }
+    } else if (changed) {
+        currentSteps++; 
     }
+
+    updateSteps();
 
     if (checkWin(grid)) {
         clearInterval(timer);
