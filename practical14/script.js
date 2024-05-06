@@ -45,7 +45,8 @@ const startGame = (game) => {
 };
 
 const toggleLights = (r, c, grid) => {
-    const originalGrid = JSON.stringify(grid); 
+    const originalGrid = JSON.stringify(grid); // Запам'ятовуємо початковий стан
+
     const toggle = (r, c) => {
         if (r >= 0 && r < 5 && c >= 0 && c < 5) {
             grid[r][c] = 1 - grid[r][c];
@@ -71,8 +72,9 @@ const toggleLights = (r, c, grid) => {
         }, 1000);
     }
 
+  
     if (JSON.stringify(grid) === originalGrid && currentSteps % 2 === 0) {
-    
+       
         currentSteps -= 2;
         updateSteps();
     }
@@ -116,7 +118,7 @@ const resetSteps = () => {
 
 const resetToInitialState = () => {
     const gameKey = Object.keys(games)[currentGameIndex];
-    const initialState = initialGameStates[gameKey];
+    const initialState = initialGameStates[currentGameIndex];
     games[gameKey].initial_state = JSON.parse(JSON.stringify(initialState)); 
     startGame(games[gameKey]);
 };
