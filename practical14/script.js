@@ -17,7 +17,7 @@ const fetching = async () => {
         initialGameStates = Object.values(games).map(game => game.initial_state); 
         setupGame(currentGameIndex);
     } catch (error) {
-        console.error('Не вдалося завантажити дані гри:', error);
+        console.error('Failed to fetch game data:', error);
     }
 };
 
@@ -46,23 +46,16 @@ const startGame = (game) => {
 
 const toggleLights = (r, c, grid) => {
     const originalGrid = JSON.stringify(grid); 
+    let changed = false; 
 
     const toggle = (r, c) => {
         if (r >= 0 && r < 5 && c >= 0 && c < 5) {
             grid[r][c] = 1 - grid[r][c];
             let cell = document.getElementById('gameBoard').rows[r].cells[c];
             cell.className = grid[r][c] === 1 ? 'lightOn' : '';
+            changed = true; 
         }
     };
-
-    const isAlreadyToggled = (r, c) => {
-        return JSON.stringify(grid) === originalGrid;
-    };
-
-    if (isAlreadyToggled(r, c)) {
-        currentSteps--; 
-        updateSteps();
-    }
 
     toggle(r, c);
     toggle(r - 1, c);
@@ -70,8 +63,13 @@ const toggleLights = (r, c, grid) => {
     toggle(r, c - 1);
     toggle(r, c + 1);
 
-    currentSteps++;
-    updateSteps();
+    if (!changed && currentSteps % 2 === 0) {
+        currentSteps -= 2;
+        updateSteps();
+    } else {
+        currentSteps++; 
+        updateSteps();
+    }
 
     if (checkWin(grid)) {
         clearInterval(timer);
