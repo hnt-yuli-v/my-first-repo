@@ -1,6 +1,7 @@
 @import url("hero.css");
 @import url("footer.css");
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz@1,6..12&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
 
 * {
     padding: 0;
@@ -85,14 +86,8 @@ h6 {
     font-weight: 400;
 }
 
-.nunito-sans {
-    font-family: "Nunito Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 400;
-    font-style: italic;
-    font-variation-settings:
-        "wdth" 100,
-        "YTLC" 500;
+*{
+    font-family: "Nunito", serif;
 }
 
 /* АДАПТИВ */
