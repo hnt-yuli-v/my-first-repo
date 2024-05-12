@@ -62,14 +62,14 @@ const toggleLights = (r, c, grid) => {
     toggle(r, c + 1);
 
     if (!changed && JSON.stringify(grid) === originalGrid) {
-        if (gameState.currentSteps % 2 === 0) {
+        if (gameState.currentSteps % 2 === 0 && gameState.currentSteps !== 0) {
             gameState.currentSteps--; 
+            updateSteps(); 
         }
     } else if (changed) {
         gameState.currentSteps++; 
+        updateSteps(); 
     }
-
-    updateSteps();
 
     if (checkWin(grid)) {
         clearInterval(gameState.timer);
@@ -123,4 +123,4 @@ const resetToInitialState = () => {
     startGame(gameState.games[gameKey]);
 };
 
-document.getElementById('newGameButton').addEventListener('click', restart);
+document.getElementById('newGameButton').addEventListener('click', changeCombination);
