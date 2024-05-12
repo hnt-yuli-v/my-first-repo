@@ -61,23 +61,21 @@ const toggleLights = (r, c, grid) => {
     toggle(r, c - 1);
     toggle(r, c + 1);
 
-    let sameGrid = true;
+    let anyChanged = false;
     for (let i = 0; i < grid.length; i++) {
         for (let j = 0; j < grid[i].length; j++) {
             if (grid[i][j] !== originalGrid[i][j]) {
-                sameGrid = false;
+                anyChanged = true;
                 break;
             }
         }
-        if (!sameGrid) break;
+        if (anyChanged) break;
     }
 
-    if (!changed && sameGrid) {
-        if (gameState.currentSteps % 2 === 0 && gameState.currentSteps !== 0) {
-            gameState.currentSteps--; 
-            updateSteps(); 
-        }
-    } else if (changed) {
+    if (!changed && !anyChanged && gameState.currentSteps % 2 === 0 && gameState.currentSteps !== 0) {
+        gameState.currentSteps--; 
+        updateSteps(); 
+    } else if (changed || anyChanged) {
         gameState.currentSteps++; 
         updateSteps(); 
     }
