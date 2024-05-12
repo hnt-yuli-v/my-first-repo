@@ -43,7 +43,7 @@ const startGame = (game) => {
 };
 
 const toggleLights = (r, c, grid) => {
-    const originalGrid = JSON.stringify(grid); 
+    const originalGrid = JSON.parse(JSON.stringify(grid)); 
     let changed = false; 
 
     const toggle = (r, c) => {
@@ -61,7 +61,18 @@ const toggleLights = (r, c, grid) => {
     toggle(r, c - 1);
     toggle(r, c + 1);
 
-    if (!changed && JSON.stringify(grid) === originalGrid) {
+    let sameGrid = true;
+    for (let i = 0; i < grid.length; i++) {
+        for (let j = 0; j < grid[i].length; j++) {
+            if (grid[i][j] !== originalGrid[i][j]) {
+                sameGrid = false;
+                break;
+            }
+        }
+        if (!sameGrid) break;
+    }
+
+    if (!changed && sameGrid) {
         if (gameState.currentSteps % 2 === 0 && gameState.currentSteps !== 0) {
             gameState.currentSteps--; 
             updateSteps(); 
