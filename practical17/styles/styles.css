@@ -135,5 +135,8 @@ h6 {
         max-width: 576px;
         margin: 0 auto;
         padding: 15px 15px;
+     }
+    .navbar-content ul > li {
+        display: none;
     }
 }
