@@ -1,4 +1,4 @@
-// AJAX 
+// AJAX-UTILS
 
 (function (global) {
     let contentAjax = {};
