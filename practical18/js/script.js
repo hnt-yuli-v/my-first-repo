@@ -1,3 +1,17 @@
+// BURGER
+
+function toggleMenu() {
+    var menuIcon = document.querySelector('.menu-icon');
+    menuIcon.classList.toggle('active');
+
+    var burgerMenu = document.querySelector('.burger');
+    burgerMenu.classList.toggle('active');
+}
+document.querySelector('.menu-icon').addEventListener('click', toggleMenu);
+
+
+// SLIDER 
+
 const slider = document.querySelector('.slider-wrapper');
 const prevButton = document.querySelector('.prev-btn');
 const nextButton = document.querySelector('.next-btn');
@@ -35,3 +49,4 @@ setInterval(() => {
     slideIndex++;
     showSlides(slideIndex);
 }, 3000);
+
