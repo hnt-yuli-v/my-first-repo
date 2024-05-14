@@ -25,10 +25,15 @@ const prevButton = document.querySelector('.prev-btn');
 const nextButton = document.querySelector('.next-btn');
 let slideIndex = 0;
 
-function showSlide(index) {
+function showSlides(index) {
     const slides = document.querySelectorAll('.slide-card');
+    if (index >= slides.length) {
+        slideIndex = 0;
+    } else if (index < 0) {
+        slideIndex = slides.length - 1;
+    }
     slides.forEach((slide, i) => {
-        if (i === index) {
+        if (i === slideIndex) {
             slide.style.display = "block";
         } else {
             slide.style.display = "none";
@@ -36,32 +41,19 @@ function showSlide(index) {
     });
 }
 
-function changeSlide(step) {
-    slideIndex = (slideIndex + step + slides.length) % slides.length;
-    showSlide(slideIndex);
-}
-
 prevButton.addEventListener('click', () => {
-    changeSlide(-1);
+    slideIndex--;
+    showSlides(slideIndex);
 });
 
 nextButton.addEventListener('click', () => {
-    changeSlide(1);
+    slideIndex++;
+    showSlides(slideIndex);
 });
 
-const slideInterval = setInterval(() => {
-    changeSlide(1);
-}, 3500);
+showSlides(slideIndex);
 
-showSlide(slideIndex);
-
-slider.addEventListener('mouseenter', () => {
-    clearInterval(slideInterval);
-});
-
-slider.addEventListener('mouseleave', () => {
-    slideInterval = setInterval(() => {
-        changeSlide(1);
-    }, 3500);
-});
-
+setInterval(() => {
+    slideIndex++;
+    showSlides(slideIndex);
+}, 40000);
