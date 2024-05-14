@@ -16,6 +16,7 @@ const slider = document.querySelector('.slider-wrapper');
 const prevButton = document.querySelector('.prev-btn');
 const nextButton = document.querySelector('.next-btn');
 let slideIndex = 0;
+let slideTimer;
 
 function showSlides(index) {
     const slides = document.querySelectorAll('.slide-card');
@@ -33,20 +34,34 @@ function showSlides(index) {
     });
 }
 
-prevButton.addEventListener('click', () => {
+function nextSlide() {
+    slideIndex++;
+    showSlides(slideIndex);
+    slideTimer = setTimeout(nextSlide, 3500);
+}
+
+function prevSlide() {
     slideIndex--;
     showSlides(slideIndex);
+}
+
+prevButton.addEventListener('click', () => {
+    prevSlide();
+    clearTimeout(slideTimer); 
 });
 
 nextButton.addEventListener('click', () => {
-    slideIndex++;
-    showSlides(slideIndex);
+    nextSlide();
+    clearTimeout(slideTimer); 
+});
+
+slider.addEventListener('mouseenter', () => {
+    clearTimeout(slideTimer); 
+});
+
+slider.addEventListener('mouseleave', () => {
+    slideTimer = setTimeout(nextSlide, 3500); 
 });
 
 showSlides(slideIndex);
-
-setInterval(() => {
-    slideIndex++;
-    showSlides(slideIndex);
-}, 3000);
-
+nextSlide(); 
