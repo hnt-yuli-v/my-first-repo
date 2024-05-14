@@ -12,6 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
     function displayError(errorMessage) {
         resultOutput.textContent = 'Error: ' + errorMessage;
         infoDiv.innerHTML = '';
+    
+        setTimeout(function() {
+            resultOutput.textContent = '';
+        }, 3000);
     }
 
     document.getElementById('add-button').addEventListener('click', function() {
@@ -32,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('div-button').addEventListener('click', function() {
         const divisor = parseFloat(op2Input.value);
         if (divisor === 0 || isNaN(divisor)) {
-            displayError('Division by zero is undefined');
+            displayError('Cannot be divided by 0!');
         } else {
             const result = parseFloat(op1Input.value) / divisor;
             displayResult(result);
@@ -40,12 +44,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     document.getElementById('log-button').addEventListener('click', function() {
-        const operand = parseFloat(op1Input.value);
-        if (operand <= 0 || isNaN(operand)) {
-            displayError('Natural logarithm of zero or negative number is undefined');
+        const op1 = parseFloat(op1Input.value);
+        if (op1 <= 0 || isNaN(op1)) {
+            displayError('Operand 1 is less or equal to 0');
             return;
         }
-        const result = Math.log(operand);
+        const result = Math.log(op1);
         displayResult(result);
         fetch('log.json')
             .then(response => response.json())
