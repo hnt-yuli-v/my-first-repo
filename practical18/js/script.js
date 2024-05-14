@@ -20,64 +20,48 @@ document.addEventListener('click', function(event) {
     }
 });
 // SLIDER 
-function fadeOut(element) {
-    let opacity = 1;
-    const fadeEffect = setInterval(() => {
-        if (opacity <= 0.1) {
-            clearInterval(fadeEffect);
-            element.style.opacity = 0;
-            element.style.display = 'none'; 
-        } else {
-            opacity -= 0.1;
-            element.style.opacity = opacity;
-        }
-    }, 50);
-}
+const slider = document.querySelector('.slider-wrapper');
+const prevButton = document.querySelector('.prev-btn');
+const nextButton = document.querySelector('.next-btn');
+let slideIndex = 0;
 
-function fadeIn(element) {
-    let opacity = 0;
-    element.style.display = 'block'; 
-    const fadeEffect = setInterval(() => {
-        if (opacity >= 1) {
-            clearInterval(fadeEffect);
-            element.style.opacity = 1;
-        } else {
-            opacity += 0.1;
-            element.style.opacity = opacity;
-        }
-    }, 50);
-}
-
-function showSlides(index) {
+function showSlide(index) {
     const slides = document.querySelectorAll('.slide-card');
-    if (index >= slides.length) {
-        slideIndex = 0;
-    } else if (index < 0) {
-        slideIndex = slides.length - 1;
-    }
-
     slides.forEach((slide, i) => {
-        if (i === slideIndex) {
-            fadeIn(slide);
+        if (i === index) {
+            slide.style.display = "block";
         } else {
-            fadeOut(slide);
+            slide.style.display = "none";
         }
     });
 }
 
+function changeSlide(step) {
+    slideIndex = (slideIndex + step + slides.length) % slides.length;
+    showSlide(slideIndex);
+}
+
 prevButton.addEventListener('click', () => {
-    slideIndex--;
-    showSlides(slideIndex);
+    changeSlide(-1);
 });
 
 nextButton.addEventListener('click', () => {
-    slideIndex++;
-    showSlides(slideIndex);
+    changeSlide(1);
 });
 
-showSlides(slideIndex);
-
-setInterval(() => {
-    slideIndex++;
-    showSlides(slideIndex);
+const slideInterval = setInterval(() => {
+    changeSlide(1);
 }, 3500);
+
+showSlide(slideIndex);
+
+slider.addEventListener('mouseenter', () => {
+    clearInterval(slideInterval);
+});
+
+slider.addEventListener('mouseleave', () => {
+    slideInterval = setInterval(() => {
+        changeSlide(1);
+    }, 3500);
+});
+
