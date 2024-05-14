@@ -27,9 +27,9 @@ function showSlides(index) {
     }
     slides.forEach((slide, i) => {
         if (i === slideIndex) {
-            slide.style.opacity = "1"; // зробити слайд видимим
+            slide.style.opacity = "1"; 
         } else {
-            slide.style.opacity = "0"; // зробити слайд невидимим
+            slide.style.opacity = "0"; 
         }
     });
 }
@@ -37,7 +37,7 @@ function showSlides(index) {
 function nextSlide() {
     slideIndex++;
     showSlides(slideIndex);
-    slideTimer = setTimeout(nextSlide, 3500); // автоматично перегортати через 3500 мс
+    slideTimer = setTimeout(nextSlide, 3500); 
 }
 
 function prevSlide() {
