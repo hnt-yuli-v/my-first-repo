@@ -1,101 +1,81 @@
-function fetchData(operation) {
-    fetch(`${operation}.json`)
-        .then(response => response.json())
-        .then(data => {
-            let helpContent;
-            if (operation === 'log' || operation === 'sin' || operation === 'tan') {
-                helpContent = `
-                    <h3>${data.name}</h3>
-                    <img src="${data.image_name}" alt="${data.name}">
-                    <p>${data.description}</p>
-                `;
-                document.getElementById('content').style.display = 'block';
-            } else {
-                helpContent = `<h2>${data.name}</h2><p>${data.description}</p>`;
-            }
-            document.getElementById('content').innerHTML = helpContent;
-        })
-        .catch(error => console.error('Error fetching data:', error));
-}
+document.addEventListener('DOMContentLoaded', function() {
+    const op1Input = document.getElementById('op1');
+    const op2Input = document.getElementById('op2');
+    const resultOutput = document.getElementById('result');
+    const infoDiv = document.getElementById('info');
 
-function calculate(operation) {
-    const op1 = parseFloat(document.getElementById('op1').value);
-    const op2 = parseFloat(document.getElementById('op2').value);
-    let result;
-    switch(operation) {
-        case 'add':
-            result = op1 + op2;
-            break;
-        case 'sub':
-            result = op1 - op2;
-            break;
-        case 'mul':
-            result = op1 * op2;
-            break;
-        case 'div':
-            if(op2 !== 0) {
-                result = op1 / op2;
-            } else {
-                document.getElementById('res').innerText = 'Cannot divide by 0!!!';
-                return;
-            }
-            break;
-        case 'log':
-            if (op1 <= 0) {
-                document.getElementById('res').innerText = 'Operand 1 is less or equal to 0';
-                return;
-            }
-            result = Math.log(op1);
-            fetchData('log');
-            document.getElementById('content').style.display = 'block'; 
-            break;
-        case 'sin':
-            result = Math.sin(op1);
-            fetchData('sin');
-            document.getElementById('content').style.display = 'block'; 
-            break;
-        case 'tan':
-            result = Math.tan(op1);
-            fetchData('tan');
-            document.getElementById('content').style.display = 'block'; 
-            break;
-        default:
-            result = 'Invalid operation';
-    }
-    if (operation !== 'log' && operation !== 'sin' && operation !== 'tan') {
-        document.getElementById('content').style.display = 'none';
-    }
-    document.getElementById('res').innerText = `Result: ${result}`;
-}
-
-document.getElementById('add-button').addEventListener('click', () => calculate('add'));
-document.getElementById('sub-button').addEventListener('click', () => calculate('sub'));
-document.getElementById('mul-button').addEventListener('click', () => calculate('mul'));
-document.getElementById('div-button').addEventListener('click', () => calculate('div'));
-document.getElementById('log-button').addEventListener('click', () => calculate('log'));
-document.getElementById('sin-button').addEventListener('click', () => calculate('sin'));
-document.getElementById('tan-button').addEventListener('click', () => calculate('tan'));
-
-document.addEventListener("DOMContentLoaded", function () {
-    const contentElement = document.getElementById('content');
-    contentElement.style.display = 'none'; 
-
-    contentElement.style.border = '2px solid #ccc';
-    contentElement.style.padding = '10px';
-    contentElement.style.marginTop = '10px';
-
-    document.getElementById("log-button").addEventListener("click", function () {
-        const op1 = parseFloat(document.getElementById("op1").value);
-        fetchData("log");
+    document.getElementById('add-button').addEventListener('click', function() {
+        const result = parseFloat(op1Input.value) + parseFloat(op2Input.value);
+        resultOutput.textContent = 'Result: ' + result;
     });
 
-    document.getElementById("sin-button").addEventListener("click", function () {
-        const op1 = parseFloat(document.getElementById("op1").value);
-        fetchData("sin");
+    document.getElementById('sub-button').addEventListener('click', function() {
+        const result = parseFloat(op1Input.value) - parseFloat(op2Input.value);
+        resultOutput.textContent = 'Result: ' + result;
     });
 
-    document.getElementById("tan-button").addEventListener("click", function () {
-        const op1 = parseFloat(document.getElementById("op1").value);
-        fetchData("tan");
+    document.getElementById('mul-button').addEventListener('click', function() {
+        const result = parseFloat(op1Input.value) * parseFloat(op2Input.value);
+        resultOutput.textContent = 'Result: ' + result;
+    });
+
+    document.getElementById('div-button').addEventListener('click', function() {
+        const divisor = parseFloat(op2Input.value);
+        if (divisor === 0) {
+            resultOutput.textContent = 'Result: Division by zero is undefined';
+        } else {
+            const result = parseFloat(op1Input.value) / divisor;
+            resultOutput.textContent = 'Result: ' + result;
+        }
+    });
+
+    document.getElementById('log-button').addEventListener('click', function() {
+        const operand = parseFloat(op1Input.value);
+        if (operand <= 0 || isNaN(operand)) {
+            resultOutput.textContent = 'Result: Natural logarithm of zero or negative number is undefined';
+        } else {
+            const result = Math.log(operand);
+            resultOutput.textContent = 'Result: ' + result;
+        }
+        fetch('log_json')
+            .then(response => response.json())
+            .then(data => {
+                infoDiv.innerHTML = `<h3>${data.name}</h3><p>${data.description}</p><img src="${data.image_name}" alt="${data.name}">`;
+            })
+            .catch(error => console.error('Error fetching logarithm info:', error));
+    });
+
+    document.getElementById('sin-button').addEventListener('click', function() {
+        const operand = parseFloat(op1Input.value);
+        if (isNaN(operand)) {
+            resultOutput.textContent = 'Result: Invalid input';
+            return;
+        }
+        const radians = operand * Math.PI / 180; 
+        const result = Math.sin(radians);
+        resultOutput.textContent = 'Result: ' + result;
+        fetch('sin.json')
+            .then(response => response.json())
+            .then(data => {
+                infoDiv.innerHTML = `<h3>${data.name}</h3><p>${data.description}</p><img src="${data.image_name}" alt="${data.name}">`;
+            })
+            .catch(error => console.error('Error fetching sine info:', error));
+    });
+
+    document.getElementById('tan-button').addEventListener('click', function() {
+        const operand = parseFloat(op1Input.value);
+        if (isNaN(operand)) {
+            resultOutput.textContent = 'Result: Invalid input';
+            return;
+        }
+        const radians = operand * Math.PI / 180; 
+        const result = Math.tan(radians);
+        resultOutput.textContent = 'Result: ' + result;
+        fetch('tan.json')
+            .then(response => response.json())
+            .then(data => {
+                infoDiv.innerHTML = `<h3>${data.name}</h3><p>${data.description}</p><img src="${data.image_name}" alt="${data.name}">`;
+            })
+            .catch(error => console.error('Error fetching tangent info:', error));
     });
 });
