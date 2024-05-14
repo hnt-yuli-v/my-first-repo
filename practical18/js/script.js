@@ -23,7 +23,6 @@ document.addEventListener('click', function(event) {
 
 
 // SLIDER 
-
 const slider = document.querySelector('.slider-wrapper');
 const prevButton = document.querySelector('.prev-btn');
 const nextButton = document.querySelector('.next-btn');
@@ -55,18 +54,12 @@ nextButton.addEventListener('click', () => {
     showSlides(slideIndex);
 });
 
-document.addEventListener('keydown', (event) => {
-    if (event.key === "ArrowLeft") {
-        slideIndex--;
-        showSlides(slideIndex);
-    } else if (event.key === "ArrowRight") {
-        slideIndex++;
-        showSlides(slideIndex);
-    }
-});
-
 showSlides(slideIndex);
 
+setInterval(() => {
+    slideIndex++;
+    showSlides(slideIndex);
+}, 3500);
 setInterval(() => {
     slideIndex++;
     showSlides(slideIndex);
