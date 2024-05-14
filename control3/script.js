@@ -1,20 +1,20 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const op1Input = document.getElementById('operand1');
-    const op2Input = document.getElementById('operand2');
+    const op1Input = document.getElementById('op1');
+    const op2Input = document.getElementById('op2');
     const resultOutput = document.getElementById('result');
     const infoDiv = document.getElementById('info');
 
     document.getElementById('add-button').addEventListener('click', function() {
         const result = parseFloat(op1Input.value) + parseFloat(op2Input.value);
         resultOutput.textContent = 'Result: ' + result;
-     
+       
         infoDiv.innerHTML = '';
     });
 
     document.getElementById('sub-button').addEventListener('click', function() {
         const result = parseFloat(op1Input.value) - parseFloat(op2Input.value);
         resultOutput.textContent = 'Result: ' + result;
-    
+       
         infoDiv.innerHTML = '';
     });
 
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = parseFloat(op1Input.value) / divisor;
             resultOutput.textContent = 'Result: ' + result;
         }
-      
+    
         infoDiv.innerHTML = '';
     });
 
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 infoDiv.innerHTML = `<h3>${data.name}</h3><p>${data.description}</p><img src="${data.image_name}" alt="${data.name}">`;
             })
             .catch(error => console.error('Error fetching logarithm info:', error));
- 
+       
         infoDiv.innerHTML = '';
     });
 
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 infoDiv.innerHTML = `<h3>${data.name}</h3><p>${data.description}</p><img src="${data.image_name}" alt="${data.name}">`;
             })
             .catch(error => console.error('Error fetching sine info:', error));
-    
+     
         infoDiv.innerHTML = '';
     });
 
@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 infoDiv.innerHTML = `<h3>${data.name}</h3><p>${data.description}</p><img src="${data.image_name}" alt="${data.name}">`;
             })
             .catch(error => console.error('Error fetching tangent info:', error));
-
+    
         infoDiv.innerHTML = '';
     });
 });
