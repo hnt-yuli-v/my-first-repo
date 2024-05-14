@@ -55,7 +55,7 @@ button:hover {
     border-color: #666;
 }
 
-/* Updated button styles */
+/* Improved button styles */
 button.primary {
     background-color: #007bff;
     border-color: #007bff;
@@ -74,4 +74,25 @@ button.secondary {
 button.secondary:hover {
     background-color: #5a6268;
     border-color: #545b62;
+}
+
+a {
+    color: #007bff; 
+    text-decoration: none; 
+}
+
+a:hover {
+    text-decoration: underline; 
+}
+
+/* Responsive adjustments */
+@media only screen and (max-width: 768px) {
+    /* Adjustments for smaller screens */
+    h1 {
+        font-size: 20px;
+    }
+    button {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
 }
