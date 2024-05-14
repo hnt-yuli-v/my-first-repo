@@ -1,5 +1,4 @@
 @import url(catalog.css);
-
 .single-category_container {
     color: #BDB76B;
     display: flex;
@@ -12,7 +11,7 @@
     width: 50%;
 }
 .single-category-img {
-    width: 40%;
+    width: 45%;
 }
 .img {
     background: url("../image/catalog/A/A-1.jpg") no-repeat;
