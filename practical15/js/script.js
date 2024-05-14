@@ -34,5 +34,5 @@ showSlides(slideIndex);
 setInterval(() => {
     slideIndex++;
     showSlides(slideIndex);
-}, 3000);
+}, 3500);
 
