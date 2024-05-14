@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Calculator</title>
+<style>
+    #result {
+        text-transform: capitalize;
+    }
+</style>
 </head>
 <body>
    <h1>Контрольна робота №3</h1>
@@ -14,7 +19,7 @@
         <input id="op1" type="text">
         <label for="op2">Operand 2:</label>
         <input id="op2" type="text">
-        <div id="result"></div>
+        <h3 id="result">Result</h3> <!-- Changed from <h3 id="result"></h3> to <h3 id="result">Result</h3> -->
         <button id="add-button">+</button>
         <button id="sub-button">-</button>
         <button id="mul-button">*</button>
