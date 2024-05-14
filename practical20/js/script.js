@@ -1,8 +1,8 @@
 import "./ajax-utils.js";
-// AJAX-UTILS
-
 (function (global) {
     let contentAjax = {};
+    let isLoading = true; 
+
     const snippetHomeHTML = "./snippets/home-snippet.html";
     const containerAjaxSelector = ".conteiner-ajax";
 
@@ -21,21 +21,70 @@ import "./ajax-utils.js";
         </div>`;
     };
 
+    const loadCatalogCategories = () 
+        if (!isLoading) {
+            isLoading = true;
+            showLoading(containerAjaxSelector);
+            ajaxUtils.sendGetRequest(allCategoriesUrl, (response) => {
+                buildAndShowCategoriesHTML(response);
+                isLoading = false;
+            });
+        }
+    };
+
+    const buildAndShowCategoriesHTML = (categories) 
+        ajaxUtils.sendGetRequest(
+            categoriesTitleHtml,
+            (categoriesTitleHtml) => {
+                ajaxUtils.sendGetRequest(
+                    categoryHtml,
+                    (categoryHtmlTemplate) => {
+                        const { html, categoriesTitle } = buildCategoriesViewHtml(
+                            categories,
+                            categoriesTitleHtml,
+                            categoryHtmlTemplate
+                        );
+                        insertHTML(containerAjaxSelector, html);
+                    },
+                    false
+                );
+            },
+            false
+        );
+    };
+
+    const buildCategoriesViewHtml = (categories, categoriesTitle, categoryHtmlTemplate) 
+        let html = "<div class='main-catalog__container'>";
+        for (const category of categories) {
+            console.log(category);
+            let categoryHtml = categoryHtmlTemplate;
+            categoryHtml = insertProperty(categoryHtml, "short_name", category["img-url"]);
+            categoryHtml = insertProperty(categoryHtml, "name", category.title);
+            html += categoryHtml;
+        }
+        html += "</div>";
+        return { html, categoriesTitle };
+    };
+
     document.addEventListener("DOMContentLoaded", (event) => {
         showLoading(containerAjaxSelector);
         setTimeout(() => {
-          ajaxUtils.sendGetRequest(
-            snippetHomeHTML,
-            (response) => {
-                insertHTML(containerAjaxSelector, response);
-                showSlides(slideIndex);
-            },
-            false
-          );
+            ajaxUtils.sendGetRequest(
+                snippetHomeHTML,
+                (response) => {
+                    insertHTML(containerAjaxSelector, response);
+                    showSlides(slideIndex);
+                },
+                false
+            );
+            isLoading = false; 
         }, 1000);
-      });
-      global.contentAjax = contentAjax;
+    });
+
+    global.contentAjax = contentAjax;
+    global.loadCatalogCategories = loadCatalogCategories; 
 })(window);
+
 
 // BURGER
 
