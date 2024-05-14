@@ -27,9 +27,9 @@ function showSlides(index) {
     }
     slides.forEach((slide, i) => {
         if (i === slideIndex) {
-            slide.style.display = "block";
+            slide.style.opacity = "1"; // зробити слайд видимим
         } else {
-            slide.style.display = "none";
+            slide.style.opacity = "0"; // зробити слайд невидимим
         }
     });
 }
@@ -37,7 +37,7 @@ function showSlides(index) {
 function nextSlide() {
     slideIndex++;
     showSlides(slideIndex);
-    slideTimer = setTimeout(nextSlide, 3500);
+    slideTimer = setTimeout(nextSlide, 3500); // автоматично перегортати через 3500 мс
 }
 
 function prevSlide() {
@@ -52,11 +52,11 @@ prevButton.addEventListener('click', () => {
 
 nextButton.addEventListener('click', () => {
     nextSlide();
-    clearTimeout(slideTimer); 
+    clearTimeout(slideTimer);
 });
 
 slider.addEventListener('mouseenter', () => {
-    clearTimeout(slideTimer); 
+    clearTimeout(slideTimer);
 });
 
 slider.addEventListener('mouseleave', () => {
