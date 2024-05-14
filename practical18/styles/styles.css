@@ -11,16 +11,6 @@
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
 }
-.slide-card {
-    display: none;
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    transition: opacity 0.5s ease; 
-}
 
 
 :focus,
