@@ -10,13 +10,13 @@
 <body>
     <div id="gameContainer">
         <h1>Lights Out</h1>
-        <button id="newGameButton" onclick="restart()">Перезапустити</button>
-        <button onclick="changeCombination()">Змінити Комбінацію</button>
+        <button id="newGameButton" onclick="restart()">Restart</button>
+        <button onclick="changeCombination()">New Game </button>
         <table id="gameBoard"></table>
         <div id="gameInfo">
-            <p>Мінімальна кількість кроків для перемоги: <span id="minSteps">0</span></p>
-            <p>Поточна кількість кроків: <span id="currentSteps">0</span></p>
-            <p>Час гри: <span id="gameTime">0</span> секунд</p>
+            <p>Target: <span id="minSteps">0</span></p>
+            <p> Moves: <span id="currentSteps">0</span></p>
+            <p>Time: <span id="gameTime">0</span> секунд</p>
         </div>
     </div>
 </body>
