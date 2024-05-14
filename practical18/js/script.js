@@ -23,10 +23,33 @@ document.addEventListener('click', function(event) {
 
 
 // SLIDER 
-const slider = document.querySelector('.slider-wrapper');
-const prevButton = document.querySelector('.prev-btn');
-const nextButton = document.querySelector('.next-btn');
-let slideIndex = 0;
+function fadeOut(element) {
+    let opacity = 1;
+    const fadeEffect = setInterval(() => {
+        if (opacity <= 0.1) {
+            clearInterval(fadeEffect);
+            element.style.opacity = 0;
+            element.style.display = 'none'; 
+        } else {
+            opacity -= 0.1;
+            element.style.opacity = opacity;
+        }
+    }, 50);
+}
+
+function fadeIn(element) {
+    let opacity = 0;
+    element.style.display = 'block'; 
+    const fadeEffect = setInterval(() => {
+        if (opacity >= 1) {
+            clearInterval(fadeEffect);
+            element.style.opacity = 1;
+        } else {
+            opacity += 0.1;
+            element.style.opacity = opacity;
+        }
+    }, 50);
+}
 
 function showSlides(index) {
     const slides = document.querySelectorAll('.slide-card');
@@ -35,11 +58,12 @@ function showSlides(index) {
     } else if (index < 0) {
         slideIndex = slides.length - 1;
     }
+
     slides.forEach((slide, i) => {
         if (i === slideIndex) {
-            slide.style.display = "block";
+            fadeIn(slide);
         } else {
-            slide.style.display = "none";
+            fadeOut(slide);
         }
     });
 }
@@ -60,6 +84,3 @@ setInterval(() => {
     slideIndex++;
     showSlides(slideIndex);
 }, 3500);
-
-
-
