@@ -28,7 +28,6 @@ const slider = document.querySelector('.slider-wrapper');
 const prevButton = document.querySelector('.prev-btn');
 const nextButton = document.querySelector('.next-btn');
 let slideIndex = 0;
-let slideTimer;
 
 function showSlides(index) {
     const slides = document.querySelectorAll('.slide-card');
@@ -39,41 +38,36 @@ function showSlides(index) {
     }
     slides.forEach((slide, i) => {
         if (i === slideIndex) {
-            slide.style.opacity = "1"; 
+            slide.style.display = "block";
         } else {
-            slide.style.opacity = "0"; 
+            slide.style.display = "none";
         }
     });
 }
 
-function nextSlide() {
-    slideIndex++;
-    showSlides(slideIndex);
-    slideTimer = setTimeout(nextSlide, 3500); 
-}
-
-function prevSlide() {
+prevButton.addEventListener('click', () => {
     slideIndex--;
     showSlides(slideIndex);
-}
-
-prevButton.addEventListener('click', () => {
-    prevSlide();
-    clearTimeout(slideTimer); 
 });
 
 nextButton.addEventListener('click', () => {
-    nextSlide();
-    clearTimeout(slideTimer);
+    slideIndex++;
+    showSlides(slideIndex);
 });
 
-slider.addEventListener('mouseenter', () => {
-    clearTimeout(slideTimer);
-});
-
-slider.addEventListener('mouseleave', () => {
-    slideTimer = setTimeout(nextSlide, 3500); 
+document.addEventListener('keydown', (event) => {
+    if (event.key === "ArrowLeft") {
+        slideIndex--;
+        showSlides(slideIndex);
+    } else if (event.key === "ArrowRight") {
+        slideIndex++;
+        showSlides(slideIndex);
+    }
 });
 
 showSlides(slideIndex);
-nextSlide(); 
+
+setInterval(() => {
+    slideIndex++;
+    showSlides(slideIndex);
+}, 3500);
