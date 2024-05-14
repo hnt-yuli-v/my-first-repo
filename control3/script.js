@@ -7,16 +7,22 @@ document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('add-button').addEventListener('click', function() {
         const result = parseFloat(op1Input.value) + parseFloat(op2Input.value);
         resultOutput.textContent = 'Result: ' + result;
+   
+        infoDiv.innerHTML = '';
     });
 
     document.getElementById('sub-button').addEventListener('click', function() {
         const result = parseFloat(op1Input.value) - parseFloat(op2Input.value);
         resultOutput.textContent = 'Result: ' + result;
+    
+        infoDiv.innerHTML = '';
     });
 
     document.getElementById('mul-button').addEventListener('click', function() {
         const result = parseFloat(op1Input.value) * parseFloat(op2Input.value);
         resultOutput.textContent = 'Result: ' + result;
+        // Очистити вміст infoDiv
+        infoDiv.innerHTML = '';
     });
 
     document.getElementById('div-button').addEventListener('click', function() {
@@ -27,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = parseFloat(op1Input.value) / divisor;
             resultOutput.textContent = 'Result: ' + result;
         }
+
+        infoDiv.innerHTML = '';
     });
 
     document.getElementById('log-button').addEventListener('click', function() {
@@ -43,6 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 infoDiv.innerHTML = `<h3>${data.name}</h3><p>${data.description}</p><img src="${data.image_name}" alt="${data.name}">`;
             })
             .catch(error => console.error('Error fetching logarithm info:', error));
+
+        infoDiv.innerHTML = '';
     });
 
     document.getElementById('sin-button').addEventListener('click', function() {
@@ -60,6 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 infoDiv.innerHTML = `<h3>${data.name}</h3><p>${data.description}</p><img src="${data.image_name}" alt="${data.name}">`;
             })
             .catch(error => console.error('Error fetching sine info:', error));
+    
+        infoDiv.innerHTML = '';
     });
 
     document.getElementById('tan-button').addEventListener('click', function() {
@@ -77,5 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 infoDiv.innerHTML = `<h3>${data.name}</h3><p>${data.description}</p><img src="${data.image_name}" alt="${data.name}">`;
             })
             .catch(error => console.error('Error fetching tangent info:', error));
+
+        infoDiv.innerHTML = '';
     });
 });
