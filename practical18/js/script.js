@@ -16,7 +16,8 @@ document.addEventListener('click', function(event) {
 
     if (!menuIcon.contains(event.target) && !burgerMenu.contains(event.target)) {
         if (burgerMenu.classList.contains('active')) {
-            toggleMenu(); 
+            toggleMenu();
+        }
     }
 });
 
