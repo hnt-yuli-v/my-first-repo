@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = Math.log(operand);
             resultOutput.textContent = 'Result: ' + result;
         }
-        fetch('log_json')
+        fetch('log.json')
             .then(response => response.json())
             .then(data => {
                 infoDiv.innerHTML = `<h3>${data.name}</h3><p>${data.description}</p><img src="${data.image_name}" alt="${data.name}">`;
