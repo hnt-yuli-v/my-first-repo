@@ -38,8 +38,8 @@ main {
 .catalog-content {
     position: relative;
     width: 200px; 
-    max-width: 200px; 
-    height: 200px;
+    max-width: 250px; 
+    height: 250px;
     margin: 30px;
 }
 .catalog-content img {
