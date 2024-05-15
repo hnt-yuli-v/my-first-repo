@@ -11,39 +11,38 @@
 .menu-icon div {
     width: 100%;
     height: 4px;
-    background-color: #BDB76B;
-    transition: transform 0.4s, opacity 0.4s, background-color 0.4s, box-shadow 0.4s; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
+    background-color: #ff00aa;
+    transition: transform 0.4s, opacity 0.4s, background-color 0.4s;
 }
 
-.menu-icon.active .bar1 {
-    transform: translateY(10px) rotate(45deg);
-    background-color: #BDB76B;
+.menu-icon .dot {
+  width: 10px;
+  height: 10px;
+  background-color: #ff00aa;
+  border-radius: 50%;
+  transition: transform 0.4s, opacity 0.4s, background-color 0.4s;
 }
 
-.menu-icon.active .bar2 {
-    opacity: 0;
+.menu-icon.active .dot {
+  background-color: #b4008d;
 }
 
-.menu-icon.active .bar3 {
-    transform: translateY(-10px) rotate(-45deg);
-    background-color: #BDB76B;
+.menu-icon.active .dot:nth-child(1) {
+  transform: translateY(10px) translateX(-5px) rotate(-45deg);
+}
+
+.menu-icon.active .dot:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-icon.active .dot:nth-child(3) {
+  transform: translateY(-10px) translateX(-5px) rotate(45deg);
 }
 
 .burger {
-    background: url('burger_icon.png') no-repeat center center; 
-    background-size: contain; 
-    width: 40px; 
-    height: 30px;
     display: none;
     opacity: 0;
     animation: fadeIn 0.8s forwards; 
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; 
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); 
 }
 
 @keyframes fadeIn {
@@ -58,23 +57,18 @@
 .burger.active {
     display: block;
     opacity: 1;
-    transform: translateY(-50%) scale(1.1); 
+}
+.content ul > li {
+    color:#ff00d4;
+    font-size: 18px;
+    font-weight: 600;
+}
+.content ul > li:hover {
+    background-color: #ff00d4;
+    color: white;
+    animation: fadeIn .4s forwards; 
 }
 
-.burger-icon {
-    display: inline-block;
-    width: 24px;
-    height: 24px;
-    background-image: url('burger_icon.png'); 
-    background-size: cover;
-    transition: transform 0.3s ease; 
-}
-
-.burger-icon.active::after {
-    content: "+";
-    transform: rotate(45deg); 
-    transition: transform 0.3s ease; /* Додано перехід */
-}
 
 .burger .navbar-categories li {
     width: 100%;
@@ -97,16 +91,6 @@
     justify-content: center;
 }
 
-.burger .navbar-categories li:hover {
-    background-color: rgba(255, 255, 255, 0.2); 
-    border-radius: 3px; /* Округлюємо кути */
-    transition: background-color 0.3s ease; 
-}
-
-.burger .navbar-categories li:hover a {
-    color: #FFFFFF; 
-}
-
 .burger .navbar-categories li a::before {
     content: "";
     background-size: cover;
@@ -121,7 +105,7 @@
 }
 
 .burger .navbar-categories li .burger-link-catalog::before {
-    background-image: url("../image/catalog-icon.png");
+    background-image: url("../image/catalog_icon.png");
 }
 
 .burger .navbar-categories li .burger-link-about::before {
@@ -140,3 +124,8 @@
         display: none;
     }
 }
+
+
+
+
+
