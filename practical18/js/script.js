@@ -5,6 +5,9 @@ function toggleMenu() {
 
     var burgerMenu = document.querySelector('.burger');
     burgerMenu.classList.toggle('active');
+
+    var burgerIcon = document.querySelector('.burger-icon');
+    burgerIcon.classList.toggle('active');
 }
 
 document.querySelector('.menu-icon').addEventListener('click', toggleMenu);
@@ -19,6 +22,7 @@ document.addEventListener('click', function(event) {
         }
     }
 });
+
 // SLIDER 
 const slider = document.querySelector('.slider-wrapper');
 const prevButton = document.querySelector('.prev-btn');
