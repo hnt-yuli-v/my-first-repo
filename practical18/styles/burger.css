@@ -44,7 +44,7 @@
 }
 
 .content ul > li {
-  color:#F0E68C;
+  color: #F0E68C;
   font-size: 18px;
   font-weight: 600;
 }
@@ -86,19 +86,19 @@
 }
 
 .burger .navbar-categories li .burger-link-home::before {
-  background-image: url("images/home.png");
+  background-image: url("../image/home.png");
 }
 
 .burger .navbar-categories li .burger-link-catalog::before {
-  background-image: url("images/catalog-icon.png");
+  background-image: url("../image/catalog-icon.png");
 }
 
 .burger .navbar-categories li .burger-link-about::before {
-  background-image: url("images/about.png");
+  background-image: url("../image/about.png");
 }
 
 .burger .navbar-categories li .burger-link-awards::before {
-  background-image: url("images/award.png");
+  background-image: url("../image/award.png");
 } 
 
 @media (min-width: 769px) {
