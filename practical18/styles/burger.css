@@ -60,6 +60,31 @@
     animation: fadeIn .4s forwards; 
 }
 
+.burger {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    transition: transform 0.3s ease; 
+}
+
+.burger.active .burger-icon {
+    transform: rotate(45deg);
+}
+
+.burger-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-image: url('your-burger-icon.png'); 
+    background-size: cover;
+    transition: transform 0.3s ease; 
+}
+
+.burger-icon.active::after {
+    content: "+";
+    transform: rotate(45deg); 
+}
 
 .burger .navbar-categories li {
     width: 100%;
