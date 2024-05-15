@@ -1,28 +1,15 @@
 //BURGER
-function toggleMenu() {
-    var menuIcon = document.querySelector('.menu-icon');
-    menuIcon.classList.toggle('active');
+ document.addEventListener('DOMContentLoaded', function () {
+        
+            const menuIcon = document.querySelector('.menu-icon');
+            const burgerMenu = document.querySelector('.burger');
 
-    var burgerMenu = document.querySelector('.burger');
-    burgerMenu.classList.toggle('active');
-
-    var burgerIcon = document.querySelector('.burger-icon');
-    burgerIcon.classList.toggle('active');
-}
-
-document.querySelector('.menu-icon').addEventListener('click', toggleMenu);
-
-document.addEventListener('click', function(event) {
-    var menuIcon = document.querySelector('.menu-icon');
-    var burgerMenu = document.querySelector('.burger');
-
-    if (!menuIcon.contains(event.target) && !burgerMenu.contains(event.target)) {
-        if (burgerMenu.classList.contains('active')) {
-            toggleMenu();
-        }
-    }
-});
-
+    
+            menuIcon.addEventListener('click', function () {
+                menuIcon.classList.toggle('active');
+                burgerMenu.classList.toggle('active');
+            });
+        });
 
 // SLIDER 
 const slider = document.querySelector('.slider-wrapper');
