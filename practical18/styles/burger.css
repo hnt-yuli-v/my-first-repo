@@ -12,64 +12,25 @@
     width: 100%;
     height: 4px;
     background-color: #BDB76B;
-    transition: transform 0.4s, opacity 0.4s, background-color 0.4s;
+    transition: transform 0.4s, opacity 0.4s, background-color 0.4s, box-shadow 0.4s; /* Додано перехід для тіні */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Додано тінь */
 }
-
-.menu-icon.active .bar1 {
-    transform: translateY(10px) rotate(45deg);
-    background-color: #BDB76B;
-}
-
-.menu-icon.active .bar2 {
-    opacity: 0;
-}
-
-.menu-icon.active .bar3 {
-    transform: translateY(-10px) rotate(-45deg);
-    background-color: #BDB76B;
-}
-
 
 .burger {
     display: none;
     opacity: 0;
     animation: fadeIn 0.8s forwards; 
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Додано перехід для тіні */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Додано тінь */
 }
 
 .burger.active {
     display: block;
     opacity: 1;
-}
-.content ul > li {
-    color:#F0E68C;
-    font-size: 18px;
-    font-weight: 600;
-}
-.content ul > li:hover {
-    background-color: #EEE8AA;
-    color: white;
-    animation: fadeIn .4s forwards; 
-}
-
-.burger {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 24px;
-    transition: transform 0.3s ease; 
-}
-
-.burger.active .burger-icon {
-    transform: rotate(45deg);
 }
 
 .burger-icon {
@@ -84,6 +45,7 @@
 .burger-icon.active::after {
     content: "+";
     transform: rotate(45deg); 
+    transition: transform 0.3s ease; /* Додано перехід */
 }
 
 .burger .navbar-categories li {
@@ -138,6 +100,15 @@
     }
     .burger > nav {
         display: none;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
     }
 }
 
