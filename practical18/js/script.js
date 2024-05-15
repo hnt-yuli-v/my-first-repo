@@ -23,6 +23,7 @@ document.addEventListener('click', function(event) {
     }
 });
 
+
 // SLIDER 
 const slider = document.querySelector('.slider-wrapper');
 const prevButton = document.querySelector('.prev-btn');
