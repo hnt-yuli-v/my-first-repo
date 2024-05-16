@@ -1,13 +1,17 @@
 //BURGER
  
-function toggleMenu() {
-    var menuIcon = document.querySelector('.menu-icon');
-    menuIcon.classList.toggle('active');
 
-    var burgerMenu = document.querySelector('.burger');
-    burgerMenu.classList.toggle('active');
+const menuIcon = document.querySelector('.menu-icon');
+const burgerMenu = document.querySelector('.burger');
+
+function toggleMenu() {
+    menuIcon.classList.toggle('active'); // Додає або видаляє клас 'active' для кнопки бургера
+    burgerMenu.classList.toggle('active'); // Додає або видаляє клас 'active' для меню
 }
-document.querySelector('.menu-icon').addEventListener('click', toggleMenu);
+
+
+menuIcon.addEventListener('click', toggleMenu);
+
 
 // SLIDER 
 const slider = document.querySelector('.slider-wrapper');
