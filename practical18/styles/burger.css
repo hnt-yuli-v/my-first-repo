@@ -12,7 +12,7 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background-color: #ff00aa;
+    background-color: #F0E68C;
     transition: transform 0.4s, opacity 0.4s, background-color 0.4s;
 }
 
@@ -49,13 +49,13 @@
 }
 
 .content ul > li {
-    color: #ff00d4;
+    color: #F0E68C;
     font-size: 18px;
     font-weight: 600;
 }
 
 .content ul > li:hover {
-    background-color: #ff00d4;
+    background-color: #BDB76B;
     color: white;
     animation: fadeIn 0.4s forwards; 
 }
