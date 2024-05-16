@@ -37,9 +37,11 @@ function showSlides(index) {
     }
     slides.forEach((slide, i) => {
         if (i === slideIndex) {
-            slide.style.display = "block";
+            slide.style.opacity = 1;
+            slide.style.zIndex = 1;
         } else {
-            slide.style.display = "none";
+            slide.style.opacity = 0;
+            slide.style.zIndex = 0;
         }
     });
 }
