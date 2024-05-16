@@ -8,7 +8,9 @@
   justify-content: space-around;
 }
 
-.menu-icon .dot {
+.menu-icon .dot1,
+.menu-icon .dot2,
+.menu-icon .dot3 {
   width: 10px;
   height: 10px;
   background-color: #ff00aa;
@@ -16,19 +18,17 @@
   transition: transform 0.4s, opacity 0.4s, background-color 0.4s;
 }
 
-.menu-icon.active .dot {
+.menu-icon.active .dot1 {
   background-color: #b4008d;
-}
-
-.menu-icon.active .dot:nth-child(1) {
   transform: translateY(10px) translateX(-5px) rotate(-45deg);
 }
 
-.menu-icon.active .dot:nth-child(2) {
+.menu-icon.active .dot2 {
   opacity: 0;
 }
 
-.menu-icon.active .dot:nth-child(3) {
+.menu-icon.active .dot3 {
+  background-color: #b4008d;
   transform: translateY(-10px) translateX(-5px) rotate(45deg);
 }
 
