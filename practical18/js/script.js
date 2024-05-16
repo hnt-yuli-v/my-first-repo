@@ -35,13 +35,13 @@ function showSlides(index) {
     } else if (index < 0) {
         slideIndex = slides.length - 1;
     }
+
+    // Встановлюємо всім слайдам однакову прозорість та збільшуємо прозорість активного слайда
     slides.forEach((slide, i) => {
         if (i === slideIndex) {
-            slide.style.opacity = 1;
-            slide.style.zIndex = 1;
+            slide.style.opacity = 1; // Зробити активний слайд повністю видимим
         } else {
-            slide.style.opacity = 0;
-            slide.style.zIndex = 0;
+            slide.style.opacity = 0.5; // Зменшити прозорість для інших слайдів
         }
     });
 }
