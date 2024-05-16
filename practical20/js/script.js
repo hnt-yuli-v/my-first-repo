@@ -3,11 +3,11 @@ import "./ajax-utils.js";
             let Content = {};
             let isLoading = true;
             const homeHTML = "./snippets/home-snippet.html";
-            const contentContainerSelector = ".content__container";
+            const contentContainerSelector = ".content_container";
             const catalogLink = document.querySelector(".catalog__link");
             const catalogHeaderContainer = "#content-header";
 
-            const allCategoriesUrl = "data/categories.json";
+            const allCategoriesUrl = "json/categories.json";
             const categoriesTitleHtml = "snippets/categories-title-snippet.html";
             const categoryHtml = "snippets/category-snippet.html";
 
@@ -54,7 +54,7 @@ import "./ajax-utils.js";
             }
 
             function buildCategoriesViewHtml(categories, categoriesTitle, categoryHtmlTemplate) {
-                let html = "<div class='main-catalog_container'>";
+                let html = "<div class='main-catalog-container'>";
                 for (const category of categories) {
                     console.log(category);
                     let categoryHtml = categoryHtmlTemplate;
