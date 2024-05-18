@@ -2,24 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>practical 14</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Lights Out</title>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
-    <div id="gameContainer">
-        <h1>Lights Out</h1>
-        <button id="newGameButton" onclick="restart()">Restart</button>
-        <button onclick="changeCombination()">New Game </button>
-        <table id="gameBoard"></table>
-        <div id="gameInfo">
-            <p>Target: <span id="minSteps">0</span></p>
-            <p> Moves: <span id="currentSteps">0</span></p>
-            <p>Time: <span id="gameTime">0</span> секунд</p>
+    <div class="container">
+        <div id="game-board"></div>
+        <div class="controls">
+            <button id="new-game-btn">Нова гра</button>
+            <button id="restart-btn">Перезапустити</button>
+            <p>Час: <span id="timer">0</span> секунд</p>
+            <p>Кроки: <span id="steps">0</span></p>
         </div>
+        <div id="message"></div>
     </div>
+    <script src="script.js"></script>
 </body>
-<script src="script.js"></script>
 </html>
-
