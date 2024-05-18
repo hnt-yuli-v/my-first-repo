@@ -3,6 +3,7 @@ const newGameBtn = document.getElementById('new-game-btn');
 const restartBtn = document.getElementById('restart-btn');
 const timerDisplay = document.getElementById('timer');
 const stepsDisplay = document.getElementById('steps');
+const targetStepsDisplay = document.getElementById('target-steps');
 const messageDisplay = document.getElementById('message');
 
 let board = [];
@@ -18,6 +19,7 @@ function initializeBoard(boardConfig) {
     targetSteps = boardConfig.targetSteps;
     renderBoard();
     resetGame();
+    targetStepsDisplay.textContent = targetSteps;
 }
 
 function renderBoard() {
