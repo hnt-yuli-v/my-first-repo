@@ -88,7 +88,7 @@ function startTimer() {
 }
 
 function startNewGame(data) {
-    currentConfig = Math.floor(Math.random() * 3);
+    currentConfig = Math.floor(Math.random() * data.configurations.length);
     const config = data.configurations[currentConfig];
     board = JSON.parse(JSON.stringify(config.board));
     initialBoard = JSON.parse(JSON.stringify(config.board));
