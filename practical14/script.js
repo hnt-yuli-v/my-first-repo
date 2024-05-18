@@ -18,9 +18,11 @@ function initializeGame() {
     fetch('gameLightOut.json')
         .then(response => response.json())
         .then(data => {
-            board = data.configurations[currentConfig].board;
-            initialBoard = JSON.parse(JSON.stringify(board));
-            targetSteps = data.configurations[currentConfig].targetSteps;
+            const config = data.configurations[currentConfig];
+            board = JSON.parse(JSON.stringify(config.board));
+            initialBoard = JSON.parse(JSON.stringify(config.board));
+            targetSteps = config.targetSteps;
+            targetStepsDisplay.textContent = targetSteps;
             renderBoard();
             resetGame();
         });
@@ -85,15 +87,23 @@ function startTimer() {
     }, 1000);
 }
 
-function startNewGame() {
+function startNewGame(data) {
     currentConfig = Math.floor(Math.random() * 3);
-    board = initialBoard = JSON.parse(JSON.stringify(board));
-    targetSteps = data.configurations[currentConfig].targetSteps;
+    const config = data.configurations[currentConfig];
+    board = JSON.parse(JSON.stringify(config.board));
+    initialBoard = JSON.parse(JSON.stringify(config.board));
+    targetSteps = config.targetSteps;
+    targetStepsDisplay.textContent = targetSteps;
     renderBoard();
     resetGame();
 }
 
-newGameBtn.addEventListener('click', startNewGame);
+newGameBtn.addEventListener('click', () => {
+    fetch('gameLightOut.json')
+        .then(response => response.json())
+        .then(data => startNewGame(data));
+});
+
 restartBtn.addEventListener('click', () => {
     board = JSON.parse(JSON.stringify(initialBoard));
     resetGame();
