@@ -1,117 +1,98 @@
-let currentGameIndex = 0;
-let currentSteps = 0;
-let games = [];
-let startTime;
+const gameBoard = document.getElementById('game-board');
+const newGameBtn = document.getElementById('new-game-btn');
+const restartBtn = document.getElementById('restart-btn');
+const timerDisplay = document.getElementById('timer');
+const stepsDisplay = document.getElementById('steps');
+const messageDisplay = document.getElementById('message');
+
+let board = [];
+let initialBoard = [];
 let timer;
-let initialGameStates = [];
+let time = 0;
+let steps = 0;
+let targetSteps = 0;
 
-const fetching = async () => {
-    try {
-        const response = await fetch('gameLightOut.json');
-        const data = await response.json();
-        games = data;
-        initialGameStates = games.map(game => JSON.parse(JSON.stringify(game.initial_state)));
-        setupGame(currentGameIndex);
-    } catch (error) {
-        console.error('Failed to fetch game data:', error);
-    }
-};
+function initializeBoard(boardConfig) {
+    board = boardConfig.board;
+    initialBoard = JSON.parse(JSON.stringify(board));
+    targetSteps = boardConfig.targetSteps;
+    renderBoard();
+    resetGame();
+}
 
-function startGame(game) {
-    clearInterval(timer);
-    startTime = Date.now();
-    timer = setInterval(updateTime, 1000);
-
-    currentSteps = 0;
-    updateSteps();
-
-    document.getElementById('minSteps').textContent = game.minimum_steps_to_win;
-
-    const board = document.getElementById('gameBoard');
-    board.innerHTML = '';
-
-    game.initial_state.forEach(function(row, r) {
-        const tr = board.insertRow();
-        row.forEach(function(cell, c) {
-            const td = tr.insertCell();
-            td.className = cell === 1 ? 'lightOn' : '';
-            td.onclick = function() {
-                toggleLights(r, c, game.initial_state);
-            };
+function renderBoard() {
+    gameBoard.innerHTML = '';
+    board.forEach((row, rowIndex) => {
+        row.forEach((cell, colIndex) => {
+            const cellDiv = document.createElement('div');
+            cellDiv.classList.add('cell');
+            if (cell) cellDiv.classList.add('on');
+            cellDiv.addEventListener('click', () => handleCellClick(rowIndex, colIndex));
+            gameBoard.appendChild(cellDiv);
         });
     });
 }
 
-function toggleLights(r, c, grid) {
-    function toggle(r, c) {
-        if (r >= 0 && r < 5 && c >= 0 && c < 5) {
-            grid[r][c] = 1 - grid[r][c];
-            const cell = document.getElementById('gameBoard').rows[r].cells[c];
-            cell.className = grid[r][c] === 1 ? 'lightOn' : '';
-        }
+function handleCellClick(row, col) {
+    toggleCell(row, col);
+    toggleCell(row - 1, col);
+    toggleCell(row + 1, col);
+    toggleCell(row, col - 1);
+    toggleCell(row, col + 1);
+    steps++;
+    stepsDisplay.textContent = steps;
+    renderBoard();
+    checkWinCondition();
+}
+
+function toggleCell(row, col) {
+    if (row >= 0 && row < 5 && col >= 0 && col < 5) {
+        board[row][col] = !board[row][col];
     }
+}
 
-    toggle(r, c);
-    toggle(r - 1, c);
-    toggle(r + 1, c);
-    toggle(r, c - 1);
-    toggle(r, c + 1);
-
-    currentSteps++;
-    updateSteps();
-
-    if (checkWin(grid)) {
+function checkWinCondition() {
+    const allOff = board.every(row => row.every(cell => !cell));
+    if (allOff) {
         clearInterval(timer);
-        setTimeout(function() {
-            alert("Вітаю! Ви виграли!");
-            restart();
-        }, 1000);
+        const message = steps <= targetSteps 
+            ? `Вітаємо! Ви завершили гру за ${steps} кроків, що є мінімумом.` 
+            : `Вітаємо! Ви завершили гру за ${steps} кроків. Можна було краще!`;
+        messageDisplay.textContent = message;
     }
 }
 
-function checkWin(grid) {
-    return grid.every(row => row.every(cell => cell === 0));
+function startNewGame() {
+    fetch('gameLightOut.json')
+        .then(response => response.json())
+        .then(data => {
+            const randomConfig = data.configurations[Math.floor(Math.random() * data.configurations.length)];
+            initializeBoard(randomConfig);
+        });
 }
 
-function changeCombination() {
-    currentGameIndex = (currentGameIndex + 1) % games.length;
-    setupGame(currentGameIndex);
+function resetGame() {
+    clearInterval(timer);
+    time = 0;
+    steps = 0;
+    timerDisplay.textContent = time;
+    stepsDisplay.textContent = steps;
+    messageDisplay.textContent = '';
+    startTimer();
 }
 
-function restart() {
-    currentSteps = 0;
-    resetToInitialState();
+function startTimer() {
+    timer = setInterval(() => {
+        time++;
+        timerDisplay.textContent = time;
+    }, 1000);
 }
 
-function updateSteps() {
-    document.getElementById('currentSteps').textContent = currentSteps;
-}
+newGameBtn.addEventListener('click', startNewGame);
+restartBtn.addEventListener('click', () => {
+    board = JSON.parse(JSON.stringify(initialBoard));
+    resetGame();
+    renderBoard();
+});
 
-function updateTime() {
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    document.getElementById('gameTime').textContent = elapsed;
-}
-
-window.onload = fetching;
-
-const savedGameIndex = localStorage.getItem('currentGameIndex');
-if (savedGameIndex !== null) {
-    currentGameIndex = parseInt(savedGameIndex);
-}
-
-function setupGame(index) {
-    const game = games[index];
-    startGame(game);
-}
-
-function resetSteps() {
-    currentSteps = 0;
-    updateSteps();
-}
-
-function resetToInitialState() {
-    games[currentGameIndex].initial_state = JSON.parse(JSON.stringify(initialGameStates[currentGameIndex]));
-    startGame(games[currentGameIndex]);
-}
-
-document.getElementById('newGameButton').addEventListener('click', restart);
+startNewGame();
