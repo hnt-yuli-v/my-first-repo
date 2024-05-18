@@ -65,17 +65,9 @@ function checkWinCondition() {
 }
 
 function startNewGame(configurations) {
-    let minStepsConfig = configurations[0];
-    let minSteps = minStepsConfig.targetSteps;
-    
-    configurations.forEach(config => {
-        if (config.targetSteps < minSteps) {
-            minSteps = config.targetSteps;
-            minStepsConfig = config;
-        }
-    });
-    
-    initializeBoard(minStepsConfig);
+    const randomConfigIndex = Math.floor(Math.random() * configurations.length);
+    const randomConfig = configurations[randomConfigIndex];
+    initializeBoard(randomConfig);
 }
 
 function resetGame() {
@@ -107,7 +99,7 @@ restartBtn.addEventListener('click', () => {
     renderBoard();
 });
 
-// Automatically start a new game when the page loads
+
 fetch('gameLightOut.json')
     .then(response => response.json())
     .then(data => startNewGame(data.configurations));
