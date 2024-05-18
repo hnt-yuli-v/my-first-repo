@@ -12,14 +12,18 @@ let timer;
 let time = 0;
 let steps = 0;
 let targetSteps = 0;
+let currentConfig = 0;
 
-function initializeBoard(boardConfig) {
-    board = boardConfig.board;
-    initialBoard = JSON.parse(JSON.stringify(board));
-    targetSteps = boardConfig.targetSteps;
-    renderBoard();
-    resetGame();
-    targetStepsDisplay.textContent = targetSteps;
+function initializeGame() {
+    fetch('gameLightOut.json')
+        .then(response => response.json())
+        .then(data => {
+            board = data.configurations[currentConfig].board;
+            initialBoard = JSON.parse(JSON.stringify(board));
+            targetSteps = data.configurations[currentConfig].targetSteps;
+            renderBoard();
+            resetGame();
+        });
 }
 
 function renderBoard() {
@@ -64,15 +68,6 @@ function checkWinCondition() {
     }
 }
 
-function startNewGame() {
-    fetch('gameLightOut.json')
-        .then(response => response.json())
-        .then(data => {
-            const randomConfig = data.configurations[Math.floor(Math.random() * data.configurations.length)];
-            initializeBoard(randomConfig);
-        });
-}
-
 function resetGame() {
     clearInterval(timer);
     time = 0;
@@ -90,6 +85,14 @@ function startTimer() {
     }, 1000);
 }
 
+function startNewGame() {
+    currentConfig = Math.floor(Math.random() * 3);
+    board = initialBoard = JSON.parse(JSON.stringify(board));
+    targetSteps = data.configurations[currentConfig].targetSteps;
+    renderBoard();
+    resetGame();
+}
+
 newGameBtn.addEventListener('click', startNewGame);
 restartBtn.addEventListener('click', () => {
     board = JSON.parse(JSON.stringify(initialBoard));
@@ -97,4 +100,4 @@ restartBtn.addEventListener('click', () => {
     renderBoard();
 });
 
-startNewGame();
+initializeGame();
