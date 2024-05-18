@@ -12,20 +12,14 @@ let timer;
 let time = 0;
 let steps = 0;
 let targetSteps = 0;
-let currentConfig = 0;
 
-function initializeGame() {
-    fetch('gameLightOut.json')
-        .then(response => response.json())
-        .then(data => {
-            const config = data.configurations[currentConfig];
-            board = JSON.parse(JSON.stringify(config.board));
-            initialBoard = JSON.parse(JSON.stringify(config.board));
-            targetSteps = config.targetSteps;
-            targetStepsDisplay.textContent = targetSteps;
-            renderBoard();
-            resetGame();
-        });
+function initializeBoard(boardConfig) {
+    board = boardConfig.board;
+    initialBoard = JSON.parse(JSON.stringify(board));
+    targetSteps = boardConfig.targetSteps;
+    renderBoard();
+    resetGame();
+    targetStepsDisplay.textContent = targetSteps;
 }
 
 function renderBoard() {
@@ -70,6 +64,15 @@ function checkWinCondition() {
     }
 }
 
+function startNewGame() {
+    fetch('gameLightOut.json')
+        .then(response => response.json())
+        .then(data => {
+            const randomConfig = data.configurations[Math.floor(Math.random() * data.configurations.length)];
+            initializeBoard(randomConfig);
+        });
+}
+
 function resetGame() {
     clearInterval(timer);
     time = 0;
@@ -87,27 +90,11 @@ function startTimer() {
     }, 1000);
 }
 
-function startNewGame(data) {
-    currentConfig = Math.floor(Math.random() * data.configurations.length);
-    const config = data.configurations[currentConfig];
-    board = JSON.parse(JSON.stringify(config.board));
-    initialBoard = JSON.parse(JSON.stringify(config.board));
-    targetSteps = config.targetSteps;
-    targetStepsDisplay.textContent = targetSteps;
-    renderBoard();
-    resetGame();
-}
-
-newGameBtn.addEventListener('click', () => {
-    fetch('gameLightOut.json')
-        .then(response => response.json())
-        .then(data => startNewGame(data));
-});
-
+newGameBtn.addEventListener('click', startNewGame);
 restartBtn.addEventListener('click', () => {
     board = JSON.parse(JSON.stringify(initialBoard));
     resetGame();
     renderBoard();
 });
 
-initializeGame();
+startNewGame();
