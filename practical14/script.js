@@ -64,13 +64,9 @@ function checkWinCondition() {
     }
 }
 
-function startNewGame() {
-    fetch('gameLightOut.json')
-        .then(response => response.json())
-        .then(data => {
-            const randomConfig = data.configurations[Math.floor(Math.random() * data.configurations.length)];
-            initializeBoard(randomConfig);
-        });
+function startNewGame(configurations) {
+    const randomConfig = configurations[Math.floor(Math.random() * configurations.length)];
+    initializeBoard(randomConfig);
 }
 
 function resetGame() {
@@ -90,11 +86,19 @@ function startTimer() {
     }, 1000);
 }
 
-newGameBtn.addEventListener('click', startNewGame);
+newGameBtn.addEventListener('click', () => {
+    fetch('configurations.json')
+        .then(response => response.json())
+        .then(data => startNewGame(data.configurations));
+});
+
 restartBtn.addEventListener('click', () => {
     board = JSON.parse(JSON.stringify(initialBoard));
     resetGame();
     renderBoard();
 });
 
-startNewGame();
+// Automatically start a new game when the page loads
+fetch('configurations.json')
+    .then(response => response.json())
+    .then(data => startNewGame(data.configurations));
