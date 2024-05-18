@@ -107,7 +107,7 @@ restartBtn.addEventListener('click', () => {
     renderBoard();
 });
 
-
+// Automatically start a new game when the page loads
 fetch('gameLightOut.json')
     .then(response => response.json())
     .then(data => startNewGame(data.configurations));
